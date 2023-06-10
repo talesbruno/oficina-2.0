@@ -1,5 +1,11 @@
-<a href="{{route('budgets.create')}}">add um novo</a>
+@extends('layouts.app')
+ 
+@section('header')
+    <h1>Listagem de agendamentos</h1>
+@endsection
 
+@section('content')
+<a href="{{route('budgets.create')}}">add um novo</a>
 <table>
     <thead>
         <th>Cliente</th>
@@ -22,10 +28,11 @@
                     <form action="{{route('budgets.destroy', $budget->id)}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn"><i class="fa-solid fa-trash-can"></i></button>
+                        <button type="submit" class="btn"><i class="fa-solid fa-trash-can"></i>deletar</button>
                     </form>
                 </td>
             </tr>
         @endforeach
     </tbody>
 </table>
+@endsection

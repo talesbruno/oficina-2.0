@@ -18,7 +18,7 @@ class BudgetController extends Controller
         if(!$budget){
             return back();
         }
-        return view('budgets.show', compact('budget'));
+        return view('show', compact('budget'));
     }
 
     public function create(){
@@ -37,7 +37,7 @@ class BudgetController extends Controller
             return back();
         }
 
-        return view('/budget.edit', compact('budget'));
+        return view('edit', compact('budget'));
     }
 
     public function update(Request $request, Budget $budget, string|int $id){
@@ -46,7 +46,7 @@ class BudgetController extends Controller
             return back();
         }
         $budget->update($request->all());
-        return redirect()->route('badgets.index');
+        return redirect()->route('budgets.index');
     }
 
     public function destroy(Budget $budget, string|int $id){
@@ -55,6 +55,6 @@ class BudgetController extends Controller
             return back();
         }
         $budget->delete();
-        return redirect()->route('badgets.index');
+        return redirect()->route('budgets.index');
     }
 }

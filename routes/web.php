@@ -14,13 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::delete('/budgets/{id}', [BudgetController::class, 'destroy'])->name("budgets.destroy");
-Route::put('/budgets/{id}', [BudgetController::class, 'update'])->name("budgets.update");
-Route::get('/budgets/{id}/edit', [BudgetController::class, 'edit'])->name("budgets.edit");
-Route::get('/budgets/create', [BudgetController::class, 'create'])->name("budgets.create");
-Route::get('/budgets/{id}', [BudgetController::class, 'show'])->name("budgets.show");
-Route::post('/budgets', [BudgetController::class, 'store'])->name("budgets.store");
-Route::get('/budgets', [BudgetController::class, 'index'])->name("budgets.index");
+Route::delete('/budgets/{id}', [BudgetController::class, 'destroy'])->name('budgets.destroy');
+Route::put('/budgets/{id}', [BudgetController::class, 'update'])->name('budgets.update');
+Route::get('/budgets/{id}/edit', [BudgetController::class, 'edit'])->name('budgets.edit');
+Route::get('/budgets/create', [BudgetController::class, 'create'])->name('budgets.create');
+Route::get('/budgets/{id}', [BudgetController::class, 'show'])->name('budgets.show');
+Route::post('/budgets', [BudgetController::class, 'store'])->name('budgets.store');
+Route::get('/budgets', [BudgetController::class, 'index'])->name('budgets.index');
 
 
 Route::get('/', function () {
