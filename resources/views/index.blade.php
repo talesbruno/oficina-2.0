@@ -5,7 +5,22 @@
 @endsection
 
 @section('content')
+
+@if ($startDate && $endDate)
+    <h2>Orçamentos filtrados por intervalo de datas: {{ $startDate }} a {{ $endDate }}</h2>
+@elseif ($filter)
+    <h2>Orçamentos filtrados por: {{ $filter }}</h2>
+@else
+    <h2>Todos os Orçamentos</h2>
+@endif
+
 <a href="{{route('budgets.create')}}">add um novo</a>
+<form method="GET" action="{{ route('budgets.index') }}">
+    <input type="text" name="startDate" placeholder="Data inicial (YYYY-MM-DD)">
+    <input type="text" name="endDate" placeholder="Data final (YYYY-MM-DD)">
+    <input type="text" name="filter" placeholder="Filtro por cliente ou vendedor">
+    <button type="submit">Filtrar</button>
+</form>
 <table>
     <thead>
         <th>Cliente</th>

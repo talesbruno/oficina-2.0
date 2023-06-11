@@ -8,9 +8,19 @@ use Illuminate\Http\Request;
 
 class BudgetController extends Controller
 {
-    public function index(Budget $budget){
-        $budgets = $budget->all();
-        return view('index', compact('budgets'));
+    public function index(string $startDate = null, string $endDate = null, string $filter = null){
+        $query = Budget::query();
+        if ($startDate && $endDate) {
+            $query->whereBetween('date', [$startDate, $endDate]);
+        }
+        if ($filter) {
+            $query->where(function ($q) use ($filter) {
+                $q->where('client', 'LIKE', '%' . $filter . '%')
+                ->orWhere('seller', 'LIKE', '%' . $filter . '%');
+            });
+        }
+        $budgets = $query->get();
+        return view('index', compact('budgets', 'startDate', 'endDate', 'filter'));
     }
 
     public function show(string $id){
