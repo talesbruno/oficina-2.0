@@ -16,8 +16,10 @@
 
 <a href="{{route('budgets.create')}}">add um novo</a>
 <form method="GET" action="{{ route('budgets.index') }}">
-    <input type="text" name="startDate" placeholder="Data inicial (YYYY-MM-DD)">
-    <input type="text" name="endDate" placeholder="Data final (YYYY-MM-DD)">
+    <label for="">Data inicial (YYYY-MM-DD)</label>
+    <input type="datetime-local" name="startDate">
+    <label for="">Data final (YYYY-MM-DD)</label>
+    <input type="datetime-local" name="endDate">
     <input type="text" name="filter" placeholder="Filtro por cliente ou vendedor">
     <button type="submit">Filtrar</button>
 </form>

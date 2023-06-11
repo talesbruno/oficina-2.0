@@ -19,7 +19,7 @@ class BudgetController extends Controller
                 ->orWhere('seller', 'LIKE', '%' . $filter . '%');
             });
         }
-        $budgets = $query->get();
+        $budgets = $query->orderBy('date', 'asc')->get();
         return view('index', compact('budgets', 'startDate', 'endDate', 'filter'));
     }
 
