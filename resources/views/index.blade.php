@@ -1,35 +1,58 @@
 @extends('layouts.app')
  
 @section('header')
-    <h1>Listagem de agendamentos</h1>
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        Listagem de agendamentos
+    </a>
+  </nav>
 @endsection
 
 @section('content')
-
-@if ($startDate && $endDate)
-    <h2>Orçamentos filtrados por intervalo de datas: {{ $startDate }} a {{ $endDate }}</h2>
+<div class="container">
+    @if ($startDate && $endDate)
+<h2>Orçamentos filtrados por intervalo de datas: {{ $startDate }} a {{ $endDate }}</h2>
 @elseif ($filter)
-    <h2>Orçamentos filtrados por: {{ $filter }}</h2>
+<h2>Orçamentos filtrados por: {{ $filter }}</h2>
 @else
-    <h2>Todos os Orçamentos</h2>
+<h2>Todos os Orçamentos</h2>
 @endif
+</div>
+<div class="container">
 
-<a href="{{route('budgets.create')}}">add um novo</a>
+    <div class="mb-3">
+        <a class="icon-link " href="{{route('budgets.create')}}">Adicionar um novo orçamento</i></a>
+    </div>
+
+
 <form method="GET" action="{{ route('budgets.index') }}">
-    <label for="">Data inicial (YYYY-MM-DD)</label>
-    <input type="datetime-local" name="startDate">
-    <label for="">Data final (YYYY-MM-DD)</label>
-    <input type="datetime-local" name="endDate">
-    <input type="text" name="filter" placeholder="Filtro por cliente ou vendedor">
-    <button type="submit">Filtrar</button>
+    <div class="form-group">
+        <div class="mb-3">
+            <h6>Filtrar por: </h6>
+        </div>
+        <div class="mb-3">
+    <label for="startDate">Data inicial (YYYY-MM-DD)</label>
+    <input class="form-control" type="datetime-local" name="startDate">
+</div>
+<div class="mb-3">
+    <label for="endDate">Data final (YYYY-MM-DD)</label>
+    <input class="form-control" type="datetime-local" name="endDate">
+</div>
+<div class="mb-3">
+    <label for="">Ou</label>
+    <input class="form-control" type="text" name="filter" placeholder="Filtro por cliente ou vendedor">
+</div>
+    <button class="btn btn-primary" type="submit">Filtrar</button>
+    </div>
 </form>
-<table>
+
+<table class="table table-striped">
     <thead>
-        <th>Cliente</th>
-        <th>descrição</th>
-        <th>Valor</th>
-        <th>Data</th>
-        <th>Vendedor</th>
+        <th scope="col">Cliente</th>
+        <th scope="col">descrição</th>
+        <th scope="col">Valor</th>
+        <th scope="col">Data</th>
+        <th scope="col">Vendedor</th>
     </thead>
     <tbody>
         @foreach ($budgets as $budget)
@@ -52,4 +75,5 @@
         @endforeach
     </tbody>
 </table>
+</div>
 @endsection
