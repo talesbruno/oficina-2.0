@@ -8,20 +8,29 @@ use Illuminate\Http\Request;
 
 class BudgetController extends Controller
 {
-    public function index(string $startDate = null, string $endDate = null, string $filter = null){
-        $query = Budget::query();
-        if ($startDate && $endDate) {
-            $query->whereBetween('date', [$startDate, $endDate]);
-        }
-        if ($filter) {
-            $query->where(function ($q) use ($filter) {
-                $q->where('client', 'LIKE', '%' . $filter . '%')
-                ->orWhere('seller', 'LIKE', '%' . $filter . '%');
-            });
-        }
-        $budgets = $query->orderBy('date', 'asc')->get();
-        return view('index', compact('budgets', 'startDate', 'endDate', 'filter'));
+    public function index(Request $request)
+{
+    $startDate = $request->input('startDate');
+    $endDate = $request->input('endDate');
+    $filter = $request->input('filter');
+    
+    $query = Budget::query();
+    
+    if ($startDate && $endDate) {
+        $query->whereBetween('date', [$startDate, $endDate]);
     }
+    
+    if ($filter) {
+        $query->where(function ($q) use ($filter) {
+            $q->where('client', $filter)
+                ->orWhere('seller', $filter);
+        });
+    }
+    
+    $budgets = $query->orderBy('date', 'asc')->paginate(10);
+    
+    return view('index', compact('budgets', 'startDate', 'endDate', 'filter'));
+}
 
     public function show(string $id){
         $budget = Budget::find($id);
